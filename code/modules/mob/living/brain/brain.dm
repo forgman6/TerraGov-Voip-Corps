@@ -5,6 +5,9 @@
 	var/alert = null
 	icon = 'icons/obj/items/organs.dmi'
 	icon_state = "brain1"
+	//surfshack start
+	voice_chat_room = ROOM_HUMAN
+	//surfshack end
 
 /mob/living/brain/Initialize(mapload)
 	. = ..()

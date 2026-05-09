@@ -6,7 +6,9 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	move_resist = INFINITY
 	resistance_flags = RESIST_ALL
-
+	//surfshack start
+	voice_chat_room = ROOM_GHOST
+	//surfshack end
 
 /mob/dead/dust()	//ghosts can't be vaporised.
 	return

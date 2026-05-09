@@ -13,7 +13,9 @@
 	var/spawning = FALSE
 	///The job we tried to join but were warned it would cause an unbalance. It's saved for later use
 	var/datum/job/saved_job
-
+	//surfshack start
+	voice_chat_room = ROOM_NONE
+	//surfshack end
 
 /mob/new_player/Initialize(mapload)
 	if(length(GLOB.newplayer_start))

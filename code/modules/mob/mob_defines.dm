@@ -132,10 +132,6 @@
 
 	/// what icon the mob uses for speechbubbles
 	var/bubble_icon = "default"
-	//surfshack start
-	///The current voice overlay image
-	var/mutable_appearance/voice_image
-	//surfshack end
 	///the icon currently used for the typing indicator's bubble
 	var/active_typing_indicator
 	///the icon currently used for the thinking indicator's bubble
@@ -148,3 +144,10 @@
 	/// We also need to clear this var/do other cleanup in client/Destroy, since that happens before logout
 	/// HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 	var/client/canon_client
+
+	//surfshack start
+	///The current voice overlay image
+	var/mutable_appearance/voice_image
+	///voicechat room for mob to join if alive
+	var/voice_chat_room = ROOM_INVALID
+	//surfshack end

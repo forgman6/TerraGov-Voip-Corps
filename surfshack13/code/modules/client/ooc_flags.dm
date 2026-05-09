@@ -2,7 +2,6 @@
 /proc/ip2country(ipaddr)
 	var/list/http_response = world.Export("http://ip-api.com/json/[ipaddr]")
 	var/page_content = http_response["CONTENT"]
-	var/country
 	if(page_content)
 		var/list/geodata = json_decode(html_decode(file2text(page_content)))
 		return geodata["countryCode"]

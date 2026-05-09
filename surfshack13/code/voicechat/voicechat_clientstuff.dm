@@ -140,20 +140,6 @@
 		return
 	clear_userCode(userCode)
 
-/// returns the desired voicechat room for alive mobs from faction
-/datum/controller/subsystem/voicechat/proc/get_mob_living_room(mob/M)
-	var/mob_alignment = get_mob_faction_alignment(M)
-	switch(mob_alignment)
-		if(ALIGNEMENT_FRIENDLY)
-			. = ROOM_MARINE
-		if(ALIGNEMENT_NEUTRAL)
-			. = ROOM_MARINE
-		if(ALIGNEMENT_HOSTILE)
-			. = ROOM_XENO
-		else
-			WARNING("Mob alignment not assigned to voicechat room {alignement: [mob_alignment || "null"]}")
-
-
 /datum/controller/subsystem/voicechat/proc/add_to_room(mob/M)
 	SIGNAL_HANDLER
 	if(!M)
@@ -163,7 +149,10 @@
 	var/userCode = client_userCode_map[C]
 	if(!C || !userCode)
 		return
-	var/room = get_mob_living_room(M)
+	var/room = M.voice_chat_room
+	if(room == ROOM_INVALID)
+		message_admins("mob [M] [M.type] moved into invalid voicechat room pls fix")
+		return
 	move_userCode_to_room(userCode, room)
 
 /datum/controller/subsystem/voicechat/proc/on_mob_death(mob/M)
@@ -193,15 +182,18 @@
 	// // everyone goes to no prox to yell at each other at round end and round start.
 	// if(isnewplayer(M) || SSticker.current_state == GAME_STATE_FINISHED)
 	// 	room = "lobby"
-
-	if(isdead(M) || M.stat == DEAD)
+	if(M.stat == DEAD)
 		room = ROOM_GHOST
 
 	else if(isliving(M))
 		if(ear_deaf || HAS_TRAIT(M, TRAIT_KNOCKEDOUT) || HAS_TRAIT(M, TRAIT_MUTE))
 			clear_from_room(M)
 		else
-			room = get_mob_living_room(M)
+			room = M.voice_chat_room
+			if(room == ROOM_INVALID)
+				message_admins("mob [M] [M.type] moved into invalid voicechat room, pls fix")
+				clear_from_room(M)
+				return
 
 	if(room && userCode_room_map[userCode] != room)
 		move_userCode_to_room(userCode, room)

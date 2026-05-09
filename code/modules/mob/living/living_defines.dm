@@ -165,3 +165,6 @@
 	var/time_entered_cryo = 0
 	///The z level this mob is currently registered in
 	var/registered_z = null
+	//surfshack start
+	voice_chat_room = ROOM_SIMPLE_ANIMAL
+	//surfshack end

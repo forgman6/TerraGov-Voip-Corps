@@ -450,6 +450,9 @@ GLOBAL_LIST_INIT(strain_list, init_glob_strain_list())
 	COOLDOWN_DECLARE(xeno_resting_cooldown)
 	///The unresting cooldown
 	COOLDOWN_DECLARE(xeno_unresting_cooldown)
+	//surfshack start
+	voice_chat_room = ROOM_XENO
+	//surfshack end
 
 ///Called whenever a xeno slashes a human
 /mob/living/carbon/xenomorph/proc/onhithuman(attacker, target) //For globadiers lifesteal debuff

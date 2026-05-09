@@ -14,7 +14,9 @@
 	var/obj/item/radio/headset/mainship/mcom/silicon/radio = null
 
 	var/list/HUD_toggled = list(0, 0, 0)
-
+	//surfshack start
+	voice_chat_room = ROOM_HUMAN
+	//surfshack end
 
 /mob/living/silicon/Initialize(mapload)
 	. = ..()

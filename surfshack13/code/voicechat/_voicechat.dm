@@ -36,7 +36,8 @@ SUBSYSTEM_DEF(voicechat)
 		message_admins("library test failed cant start voicechat")
 		return SS_INIT_FAILURE
 
-	add_rooms(list(ROOM_MARINE, ROOM_XENO, ROOM_GHOST))
+	add_rooms(GLOB.rooms_proximity)
+	add_rooms(GLOB.rooms_global, proximity_mode = FALSE)
 	start_node()
 
 	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_ENDED, PROC_REF(on_round_end)) //moves everyone to no prox room at round end.
@@ -148,6 +149,10 @@ SUBSYSTEM_DEF(voicechat)
 	if(!room || !current_rooms.Find(room))
 		return
 
+	if(room == ROOM_NONE)
+		clear_userCode(userCode)
+		return
+
 	var/own_room = userCode_room_map[userCode]
 	if(own_room)
 		current_rooms[own_room] -= userCode
@@ -155,6 +160,7 @@ SUBSYSTEM_DEF(voicechat)
 	userCode_room_map[userCode] = room
 	current_rooms[room] += userCode
 	message_admins("move to room worked {room: [userCode_room_map[userCode] || "null"]}")
+
 
 
 /datum/controller/subsystem/voicechat/proc/link_userCode_client(userCode, client)
