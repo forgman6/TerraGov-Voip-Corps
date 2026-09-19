@@ -6,8 +6,8 @@ has_git="$(command -v git)"
 has_curl="$(command -v curl)"
 has_cargo="$(command -v ~/.cargo/bin/cargo)"
 has_sudo="$(command -v sudo)"
-has_ytdlp="$(command -v yt-dlp)"
-has_pip3="$(command -v pip3)"
+# has_ytdlp="$(command -v yt-dlp)"
+# has_pip3="$(command -v pip3)"
 set -e
 set -x
 
