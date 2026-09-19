@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(ticker)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
 				for(var/client/C AS in GLOB.clients)
 					C.mob?.update_sight() // To reveal ghosts
-
+				SEND_SIGNAL(src, COMSIG_TICKER_ROUND_ENDED)
 		if(GAME_STATE_FINISHED)
 			if(ready_for_reboot)
 				if(isnull(reboot_timer))
